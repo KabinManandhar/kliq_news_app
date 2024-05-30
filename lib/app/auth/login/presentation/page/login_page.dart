@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kliq_news_app/config/router/app_router.dart';
 import 'package:kliq_news_app/core/global/constants/app_sizes.dart';
 import 'package:kliq_news_app/core/global/page/base_page.dart';
 import 'package:kliq_news_app/core/global/widgets/app_button.dart';
 import 'package:kliq_news_app/core/global/widgets/app_text_field.dart';
+import 'package:kliq_news_app/core/global/widgets/app_theme_button.dart';
 import 'package:kliq_news_app/core/resources/extensions/context_extension.dart';
 import 'package:kliq_news_app/core/resources/ui_helper.dart';
 
@@ -18,6 +19,7 @@ class LoginPage extends ConsumerWidget {
     final UiHelper uiHelper = UiHelper();
     return BasePage(
       titleText: " ",
+      actions: const [ThemeToggleButton()],
       body: Padding(
         padding: const EdgeInsets.all(AppPadding.padding14),
         child: Column(
