@@ -27,4 +27,12 @@ flutter build apk --release --dart-define=NEWS_API_KEY=pub_45291bd55be5d50098bd2
 
 ---
 
-## 30 May [7PM - ]
+## 30 May [7PM - 11:02PM]
+
+- Updated designs and baseview in Login, Account, Register pages
+- Theme manager added
+- Firebase Configurations and setups via FlutterFire CLI
+- Added reusable widgets
+- Setups for Authentications
+- Clean Architecture research and setup for Riverpod
+- flutter_hooks reseaerch
