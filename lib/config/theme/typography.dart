@@ -6,7 +6,7 @@ import 'app_colors_light.dart';
 TextTheme lightTextTheme(BuildContext context) {
   return TextTheme(
     displayLarge: GoogleFonts.manrope(
-      fontSize: 30,
+      fontSize: 40,
       fontWeight: FontWeight.w700,
       color: AppColorsLight.appBlack,
     ),

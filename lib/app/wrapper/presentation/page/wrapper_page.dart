@@ -2,11 +2,9 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:kliq_news_app/config/router/app_router.dart';
 import 'package:kliq_news_app/core/resources/extensions/context_extension.dart';
 import 'package:line_icons/line_icons.dart';
-
-import '../../../../config/theme/app_colors_dark.dart';
-import '../../../../config/theme/app_colors_light.dart';
 
 @RoutePage()
 class WrapperPage extends StatelessWidget {
@@ -25,10 +23,9 @@ class WrapperPage extends StatelessWidget {
   ];
 
   final List<PageRouteInfo<dynamic>> routes = [
-    // const HomeRoute(),
-    // const CategoryRoute(),
-    // const TimeLogRoute(),
-    // const SettingsRoute(),
+    const HomeRoute(),
+    const FavouriteRoute(),
+    const AccountRoute(),
   ];
 
   @override
@@ -57,29 +54,11 @@ class WrapperPage extends StatelessWidget {
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
         return Scaffold(
-          floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-          floatingActionButton: InkWell(
-            onLongPress: () {
-              // context.router.push(const SessionStartRoute());
-            },
-            child: FloatingActionButton(
-              shape: const CircleBorder(),
-              backgroundColor: context.isDarkMode
-                  ? AppColorsDark.appGreen
-                  : AppColorsLight.appGreen,
-              onPressed: () {
-                // context.router.push(const SessionEndRoute());
-              },
-              disabledElevation: 0,
-              elevation: 0,
-              child: const Icon(Icons.play_arrow),
-            ),
-          ),
           body: child,
           bottomNavigationBar: AnimatedBottomNavigationBar(
             activeIndex: tabsRouter.activeIndex,
             onTap: tabsRouter.setActiveIndex,
-            // gapWidth: 0,
+            gapLocation: GapLocation.none,
             height: context.screenHeight / 15,
             backgroundColor: context.theme.colorScheme.background,
             activeColor: context.theme.primaryColor,
@@ -87,7 +66,6 @@ class WrapperPage extends StatelessWidget {
             splashColor: context.theme.disabledColor,
             elevation: 10,
             blurEffect: false,
-            notchSmoothness: NotchSmoothness.softEdge,
             icons: iconData,
           ),
         );

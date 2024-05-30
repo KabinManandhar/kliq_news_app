@@ -18,6 +18,11 @@ class AppRouter extends _$AppRouter {
 
   @override
   List<AutoRoute> get routes => [
+        //Login Page
+        AutoRoute(path: RouteName.login, page: LoginRoute.page),
+        //Register Page
+        AutoRoute(path: RouteName.register, page: RegisterRoute.page),
+        // Wrapper Page,
         AutoRoute(
           path: '/',
           page: WrapperRoute.page,
