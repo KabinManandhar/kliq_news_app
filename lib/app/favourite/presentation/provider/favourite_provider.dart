@@ -20,7 +20,7 @@ class FavouriteNotifier extends _$FavouriteNotifier {
   }
 
   void removeFromFavourite(ArticleEntity articleEntity) {
-    if (!state.articles.contains(articleEntity)) {
+    if (state.articles.contains(articleEntity)) {
       state = FavouriteState(
           articles: (state.articles
               .where((p) => p.articleId != articleEntity.articleId)

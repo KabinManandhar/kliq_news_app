@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kliq_news_app/app/auth/provider/auth_notifier_provider.dart';
+import 'package:kliq_news_app/config/router/app_router.dart';
 import 'package:kliq_news_app/core/global/constants/app_sizes.dart';
 import 'package:kliq_news_app/core/global/page/base_page.dart';
 import 'package:kliq_news_app/core/global/widgets/app_button.dart';
@@ -29,6 +30,10 @@ class RegisterPage extends HookConsumerWidget {
               content: Text('User Authenticated'),
               behavior: SnackBarBehavior.floating,
             ),
+          );
+          context.router.pushAndPopUntil(
+            const HomeRoute(),
+            predicate: (route) => false,
           );
         },
         unauthenticated: (message) {

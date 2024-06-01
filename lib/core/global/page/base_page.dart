@@ -23,7 +23,7 @@ class BasePage extends StatelessWidget {
 
   BasePage({
     super.key,
-    this.automaticallyImplyiLeading = true,
+    this.automaticallyImplyiLeading = false,
     this.titleText,
     this.titleWidget,
     required this.body,

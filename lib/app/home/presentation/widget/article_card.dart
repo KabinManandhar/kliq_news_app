@@ -67,10 +67,13 @@ class ArticleCard extends ConsumerWidget {
                               : Colors.white,
                         ),
                         onPressed: () {
-                          // _toggleLike();
-                          ref
-                              .read(favouriteNotifierProvider.notifier)
-                              .addToFavourite(article);
+                          favouriteState.articles.contains(article)
+                              ? ref
+                                  .read(favouriteNotifierProvider.notifier)
+                                  .removeFromFavourite(article)
+                              : ref
+                                  .read(favouriteNotifierProvider.notifier)
+                                  .addToFavourite(article);
                         },
                       ),
                     ),

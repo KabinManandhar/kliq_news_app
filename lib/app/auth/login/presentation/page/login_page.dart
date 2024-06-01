@@ -36,6 +36,10 @@ class LoginPage extends HookConsumerWidget {
               behavior: SnackBarBehavior.floating,
             ),
           );
+          context.router.pushAndPopUntil(
+            const HomeRoute(),
+            predicate: (route) => false,
+          );
         },
         unauthenticated: (message) {
           EasyLoading.showError('Login Failed');
@@ -72,7 +76,14 @@ class LoginPage extends HookConsumerWidget {
     });
     final UiHelper uiHelper = UiHelper();
     return BasePage(
-      titleText: " ",
+      automaticallyImplyiLeading: false,
+      titleWidget: TextButton(
+        onPressed: () {
+          context.router
+              .pushAndPopUntil(WrapperRoute(), predicate: (_) => false);
+        },
+        child: const Text('Skip Login'),
+      ),
       actions: const [ThemeToggleButton()],
       body: Padding(
         padding: const EdgeInsets.all(AppPadding.padding14),
@@ -114,13 +125,6 @@ class LoginPage extends HookConsumerWidget {
               onPressed: () {
                 context.router.push(const RegisterRoute());
               },
-            ),
-            TextButton(
-              onPressed: () {
-                context.router
-                    .pushAndPopUntil(WrapperRoute(), predicate: (_) => false);
-              },
-              child: const Text('Skip Login'),
             ),
             const Spacer(),
           ],

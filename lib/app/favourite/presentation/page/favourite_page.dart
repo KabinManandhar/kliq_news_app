@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kliq_news_app/app/favourite/presentation/provider/favourite_provider.dart';
 import 'package:kliq_news_app/app/favourite/presentation/provider/favourite_states.dart';
-import 'package:kliq_news_app/app/home/presentation/provider/home_provider.dart';
 import 'package:kliq_news_app/app/home/presentation/widget/article_card.dart';
+import 'package:kliq_news_app/config/router/app_router.dart';
 import 'package:kliq_news_app/core/global/constants/app_strings.dart';
 import 'package:kliq_news_app/core/global/page/base_page.dart';
 import 'package:kliq_news_app/core/global/widgets/app_theme_button.dart';
 import 'package:kliq_news_app/core/resources/services/connectivity/connectivity_status_provider.dart';
+import 'package:kliq_news_app/core/resources/services/connectivity/firebase_auth_provider.dart';
 
 @RoutePage()
 class FavouritePage extends ConsumerWidget {
@@ -17,8 +18,18 @@ class FavouritePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final connectivityStatus = ref.watch(connectivityStatusProvider);
-    final homeState = ref.watch(homeNotifierProvider);
     final favouriteState = ref.watch(favouriteNotifierProvider);
+    final authStateChange =
+        ref.listen(authStateChangesProvider, (previous, next) {
+      if (next.value == null) {
+        context.router.pushAndPopUntil(
+          const LoginRoute(),
+          predicate: (route) => false,
+        );
+      } else {
+        debugPrint('logged in');
+      }
+    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (connectivityStatus == ConnectivityStatus.isConnected) {
         debugPrint('Connected');
