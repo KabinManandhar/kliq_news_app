@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kliq_news_app/app/auth/provider/auth_notifier_provider.dart';
 import 'package:kliq_news_app/config/router/app_router.dart';
 import 'package:kliq_news_app/core/global/constants/app_sizes.dart';
 import 'package:kliq_news_app/core/global/page/base_page.dart';
@@ -10,13 +13,41 @@ import 'package:kliq_news_app/core/global/widgets/app_theme_button.dart';
 import 'package:kliq_news_app/core/resources/extensions/context_extension.dart';
 import 'package:kliq_news_app/core/resources/services/connectivity/connectivity_status_provider.dart';
 import 'package:kliq_news_app/core/resources/ui_helper.dart';
+import 'package:kliq_news_app/core/resources/validators.dart';
 
 @RoutePage()
-class LoginPage extends ConsumerWidget {
+class LoginPage extends HookConsumerWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+
+    ref.listen(authNotifierProvider, (previous, next) {
+      next.maybeWhen(
+        orElse: () => null,
+        authenticated: (user) {
+          // Navigate to any screen
+          EasyLoading.dismiss();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('User Logged In'),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        },
+        unauthenticated: (message) {
+          EasyLoading.showError('Login Failed');
+          return ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(message!),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        },
+      );
+    });
     var connectivityStatus = ref.watch(connectivityStatusProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -51,22 +82,31 @@ class LoginPage extends ConsumerWidget {
             const Spacer(),
             _welcomeTexts(context),
             uiHelper.mHeight,
-            const AppTextField(
+            AppTextField(
               hintText: 'Email',
               label: 'Email',
+              validator: AppValidators.validateEmail,
+              controller: emailController,
               hidePadding: true,
             ),
             uiHelper.sHeight,
-            const AppTextField(
+            AppTextField(
               hintText: 'Password',
               label: 'Password',
+              isObscure: true,
+              validator: AppValidators.validatePassword,
+              controller: passwordController,
               hidePadding: true,
             ),
             const Spacer(),
             AppButton(
               label: 'Login',
               onPressed: () {
-                debugPrint('login');
+                ref.read(authNotifierProvider.notifier).login(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    );
+                EasyLoading.show(status: 'Logging in...');
               },
             ),
             AppButton(
@@ -74,6 +114,13 @@ class LoginPage extends ConsumerWidget {
               onPressed: () {
                 context.router.push(const RegisterRoute());
               },
+            ),
+            TextButton(
+              onPressed: () {
+                context.router
+                    .pushAndPopUntil(WrapperRoute(), predicate: (_) => false);
+              },
+              child: const Text('Skip Login'),
             ),
             const Spacer(),
           ],

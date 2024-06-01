@@ -48,7 +48,9 @@ class FavouritePage extends ConsumerWidget {
           return const Center(child: Text('Failed to load articles'));
         case FavouriteStateStatus.success:
           if (favouriteState.articles.isEmpty) {
-            return Center(child: Text(AppStrings.noFavouriteArticles),);
+            return const Center(
+              child: Text(AppStrings.noFavouriteArticles),
+            );
           }
           return ListView.builder(
             itemCount: favouriteState.articles.length,
@@ -65,7 +67,7 @@ class FavouritePage extends ConsumerWidget {
     return BasePage(
       actions: const [ThemeToggleButton()],
       body: buildContent(),
-      titleText: AppStrings.home,
+      titleText: AppStrings.favourite,
     );
   }
 }

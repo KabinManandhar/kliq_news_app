@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'favourite_provider.dart';
+part of 'auth_remote_data_source.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$favouriteNotifierHash() => r'8fc9e4af7a0057bf695546fe0350c4d5ad509bcb';
+String _$authRemoteDataSourceHash() =>
+    r'b6957879078045fa4f59e8fed9425e76846aebcf';
 
-/// See also [FavouriteNotifier].
-@ProviderFor(FavouriteNotifier)
-final favouriteNotifierProvider =
-    NotifierProvider<FavouriteNotifier, FavouriteState>.internal(
-  FavouriteNotifier.new,
-  name: r'favouriteNotifierProvider',
+/// See also [authRemoteDataSource].
+@ProviderFor(authRemoteDataSource)
+final authRemoteDataSourceProvider =
+    AutoDisposeProvider<AuthRemoteDataSource>.internal(
+  authRemoteDataSource,
+  name: r'authRemoteDataSourceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$favouriteNotifierHash,
+      : _$authRemoteDataSourceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$FavouriteNotifier = Notifier<FavouriteState>;
+typedef AuthRemoteDataSourceRef = AutoDisposeProviderRef<AuthRemoteDataSource>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

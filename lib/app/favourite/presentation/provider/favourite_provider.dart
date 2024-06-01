@@ -8,11 +8,10 @@ part 'favourite_provider.g.dart';
 class FavouriteNotifier extends _$FavouriteNotifier {
   @override
   FavouriteState build() {
-    return FavouriteState(articles: {}, status: FavouriteStateStatus.loading);
+    return FavouriteState(articles: {}, status: FavouriteStateStatus.success);
   }
 
   void addToFavourite(ArticleEntity articleEntity) {
-   
     if (!state.articles.contains(articleEntity)) {
       state = FavouriteState(
           articles: {...state.articles, articleEntity},

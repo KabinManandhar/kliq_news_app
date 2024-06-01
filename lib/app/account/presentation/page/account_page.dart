@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kliq_news_app/config/router/app_router.dart';
@@ -17,6 +18,7 @@ class AccountPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeNotifier = ref.read(themeNotifierProvider.notifier);
+    final User? user = FirebaseAuth.instance.currentUser;
     return BasePage(
       body: Padding(
         padding: const EdgeInsets.all(AppPadding.padding8),
@@ -29,7 +31,7 @@ class AccountPage extends ConsumerWidget {
                   style: context.textTheme.headlineMedium,
                 ),
                 subtitle: Text(
-                  'kabinmanandhar@gmail.com',
+                  user?.email ?? "no Email",
                   style: context.textTheme.bodySmall,
                 ),
                 leading: const Icon(LineIcons.userCircleAlt),
@@ -39,7 +41,8 @@ class AccountPage extends ConsumerWidget {
             AppButton(
               label: AppStrings.logout,
               buttonColor: Colors.red,
-              onPressed: () {
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
                 context.router.pushAndPopUntil(const LoginRoute(),
                     predicate: (_) => false);
               },
