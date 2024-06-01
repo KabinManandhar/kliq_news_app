@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "438283501369",
+    "project_id": "kliq-news-app",
+    "storage_bucket": "kliq-news-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:438283501369:android:7cec77f9c1ffe3a263f2e8",
+        "android_client_info": {
+          "package_name": "com.example.kliq_news_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApEcEForOk0naH2h1hoyLQwBBpJbKBYa8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
