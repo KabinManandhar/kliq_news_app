@@ -13,15 +13,15 @@ class ThemeToggleButton extends ConsumerStatefulWidget {
 class _ThemeToggleButtonState extends ConsumerState<ThemeToggleButton> {
   int _currentIndex = 0;
 
-  final List<String> _emojis = [
-    '🌍', // System theme emoji
-    '🌙', // Dark theme emoji
-    '☀️', // Light theme emoji
+  final List<Map<String, String>> _themes = [
+    {'emoji': '🌍', 'label': 'System'}, // System theme
+    {'emoji': '🌙', 'label': 'Dark'}, // Dark theme
+    {'emoji': '☀️', 'label': 'Light'}, // Light theme
   ];
 
   void _toggleTheme() {
     setState(() {
-      _currentIndex = (_currentIndex + 1) % _emojis.length;
+      _currentIndex = (_currentIndex + 1) % _themes.length;
     });
 
     final themeNotifier = ref.read(themeNotifierProvider.notifier);
@@ -40,12 +40,27 @@ class _ThemeToggleButtonState extends ConsumerState<ThemeToggleButton> {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Text(
-        _emojis[_currentIndex],
-        style: context.textTheme.bodyLarge, // Adjust font size as needed
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        child: IconButton(
+          icon: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                _themes[_currentIndex]['emoji']!,
+                style: context.textTheme.bodySmall,
+              ),
+              const SizedBox(width: 8.0),
+              Text(
+                _themes[_currentIndex]['label']!,
+                style: context.textTheme.bodySmall,
+              ),
+            ],
+          ),
+          onPressed: _toggleTheme,
+        ),
       ),
-      onPressed: _toggleTheme,
     );
   }
 }

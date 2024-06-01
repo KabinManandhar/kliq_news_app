@@ -5,7 +5,5 @@ class AuthGuard extends AutoRouteGuard {
 
   @override
   Future<void> onNavigation(
-      NavigationResolver resolver, StackRouter router) async {
-        
-      }
+      NavigationResolver resolver, StackRouter router) async {}
 }

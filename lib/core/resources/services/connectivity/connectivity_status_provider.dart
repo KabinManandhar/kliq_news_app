@@ -38,6 +38,6 @@ class ConnectivityStatusNotifier extends StateNotifier<ConnectivityStatus> {
   }
 }
 
-final connectivityStatusProviders = StateNotifierProvider((ref) {
+final connectivityStatusProvider = StateNotifierProvider((ref) {
   return ConnectivityStatusNotifier();
 });

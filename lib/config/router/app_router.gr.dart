@@ -21,6 +21,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AccountPage(),
       );
     },
+    ArticleDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<ArticleDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ArticleDetailPage(
+          key: args.key,
+          article: args.article,
+        ),
+      );
+    },
     FavouriteRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -68,6 +78,44 @@ class AccountRoute extends PageRouteInfo<void> {
   static const String name = 'AccountRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ArticleDetailPage]
+class ArticleDetailRoute extends PageRouteInfo<ArticleDetailRouteArgs> {
+  ArticleDetailRoute({
+    Key? key,
+    required ArticleEntity article,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ArticleDetailRoute.name,
+          args: ArticleDetailRouteArgs(
+            key: key,
+            article: article,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ArticleDetailRoute';
+
+  static const PageInfo<ArticleDetailRouteArgs> page =
+      PageInfo<ArticleDetailRouteArgs>(name);
+}
+
+class ArticleDetailRouteArgs {
+  const ArticleDetailRouteArgs({
+    this.key,
+    required this.article,
+  });
+
+  final Key? key;
+
+  final ArticleEntity article;
+
+  @override
+  String toString() {
+    return 'ArticleDetailRouteArgs{key: $key, article: $article}';
+  }
 }
 
 /// generated route for

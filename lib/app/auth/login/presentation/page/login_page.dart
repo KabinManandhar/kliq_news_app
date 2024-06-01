@@ -17,17 +17,20 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var connectivityStatusProvider = ref.watch(connectivityStatusProviders);
+    var connectivityStatus = ref.watch(connectivityStatusProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (connectivityStatus == ConnectivityStatus.isConnected) {
+        return;
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           showCloseIcon: true,
-          duration: connectivityStatusProvider == ConnectivityStatus.isConnected
+          duration: connectivityStatus == ConnectivityStatus.isConnected
               ? const Duration(milliseconds: 500)
               : const Duration(seconds: 30),
           content: Text(
-            connectivityStatusProvider == ConnectivityStatus.isConnected
+            connectivityStatus == ConnectivityStatus.isConnected
                 ? 'Welcome!'
                 : 'Please reconnect to the internet',
           ),

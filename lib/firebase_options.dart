@@ -37,7 +37,7 @@ class DefaultFirebaseOptions {
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
         );
-    } 
+    }
   }
 
   static const FirebaseOptions web = FirebaseOptions(
@@ -85,5 +85,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'kliq-news-app.appspot.com',
     measurementId: 'G-11MLQ8TLED',
   );
-
 }

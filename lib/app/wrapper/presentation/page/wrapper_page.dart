@@ -54,6 +54,7 @@ class WrapperPage extends StatelessWidget {
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
         return Scaffold(
+          
           body: child,
           bottomNavigationBar: AnimatedBottomNavigationBar(
             activeIndex: tabsRouter.activeIndex,

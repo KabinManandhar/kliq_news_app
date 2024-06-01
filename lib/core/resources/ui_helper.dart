@@ -11,7 +11,7 @@ class UiHelper {
 
   UiHelper._internal();
 
-    final sWidth = const SizedBox(width: AppSize.size12);
+  final sWidth = const SizedBox(width: AppSize.size12);
   final mWidth = const SizedBox(width: AppSize.size24);
   final mlWidth = const SizedBox(width: AppSize.size36);
   final lWidth = const SizedBox(width: AppSize.size48);
@@ -19,7 +19,6 @@ class UiHelper {
   final mHeight = const SizedBox(height: AppSize.size24);
   final mlHeight = const SizedBox(height: AppSize.size36);
   final lHeight = const SizedBox(height: AppSize.size48);
-
 
   Color getColorBasedOnBg(
       {required Color color,
