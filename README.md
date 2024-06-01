@@ -16,7 +16,7 @@ flutter build apk --release --dart-define=NEWS_API_KEY=pub_45291bd55be5d50098bd2
 
 > .vscode folder with launch json is also added
 
-## 29 May [8PM - 10:20PM]:
+## 29 May [ 8PM - 10:20PM ]:
 
 - Initial setup for app
 - Typography and Theme setups
@@ -27,7 +27,7 @@ flutter build apk --release --dart-define=NEWS_API_KEY=pub_45291bd55be5d50098bd2
 
 ---
 
-## 30 May [7PM - 11:02PM]
+## 30 May [ 7PM - 11:02PM ]
 
 - Updated designs and baseview in Login, Account, Register pages
 - Theme manager added
@@ -42,10 +42,15 @@ flutter build apk --release --dart-define=NEWS_API_KEY=pub_45291bd55be5d50098bd2
 - Minor UI updatea
 - Planning and Research on how to implement the APIs
 
-## 1st June [11AM- ]
+## 1st June [ 11AM- 10:00PM ]
 - API integration with Retrofit 
 - updates in constants - setup of Home Page UI 
 - Article Mdoel and entity created 
 - Clean Architecture setups 
 - Depencency Inejection via Providers 
 - Routing Updates and changes
+- Hive integration for storing favourite locally
+- Login handled completely by Firebase authentications
+- Auth routing and blocking added to required screens
+- Minor design flaws and functional fixes
+- Rough implementations of Firebase and Hive integrations
