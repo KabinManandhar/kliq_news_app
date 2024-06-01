@@ -32,7 +32,7 @@ GetLatestNewsArticlesUseCase getNewsArticleUseCase(
 //!---------Value Type Providers---------
 
 //?---------Notifier Type Providers---------
-@riverpod
+@Riverpod(keepAlive: true)
 class HomeNotifier extends _$HomeNotifier {
   @override
   HomeState build() {
@@ -40,10 +40,7 @@ class HomeNotifier extends _$HomeNotifier {
     return HomeState(articles: {}, status: HomeStateStatus.loading);
   }
 
- 
-
   Future<void> getLatestArticles() async {
-    state = state.copyWith(status: HomeStateStatus.loading);
     final val = await ref.read(getNewsArticleUseCaseProvider)(NoParams());
     if (val is DataSuccess && val.data != null) {
       state = HomeState(
@@ -53,4 +50,5 @@ class HomeNotifier extends _$HomeNotifier {
     }
   }
 }
+
 //?---------Notifier Type Providers---------

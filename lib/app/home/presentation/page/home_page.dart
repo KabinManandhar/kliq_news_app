@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kliq_news_app/app/favourite/presentation/provider/favourite_provider.dart';
 import 'package:kliq_news_app/app/home/presentation/provider/home_provider.dart';
 import 'package:kliq_news_app/app/home/presentation/provider/home_states.dart';
 import 'package:kliq_news_app/app/home/presentation/widget/article_card.dart';
@@ -17,21 +18,26 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final connectivityStatus = ref.watch(connectivityStatusProvider);
     final homeState = ref.watch(homeNotifierProvider);
-
+    final favouriteState = ref.watch(favouriteNotifierProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          showCloseIcon: true,
-          duration: connectivityStatus == ConnectivityStatus.isConnected
-              ? const Duration(milliseconds: 500)
-              : const Duration(seconds: 30),
-          content: Text(
-            connectivityStatus == ConnectivityStatus.isConnected
-                ? 'Welcome!'
-                : 'Please reconnect to the internet',
+      if (connectivityStatus == ConnectivityStatus.isConnected) {
+        debugPrint('Connected');
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            showCloseIcon: true,
+            duration: connectivityStatus == ConnectivityStatus.isConnected
+                ? const Duration(milliseconds: 500)
+                : const Duration(seconds: 5),
+            content: Text(
+              connectivityStatus == ConnectivityStatus.isConnected
+                  ? 'Welcome!'
+                  : 'Please reconnect to the internet',
+            ),
           ),
-        ),
-      );
+        );
+      }
     });
 
     Widget buildContent() {

@@ -9,6 +9,7 @@ class AppStrings {
   static const String register = 'Register';
   static const String home = 'Home';
   static const String favourite = 'Favourite';
+  static const String noFavouriteArticles = 'No Favourite Articles added.';
   static const String account = 'Account';
 
   static const String email = 'Email';

@@ -37,4 +37,15 @@ flutter build apk --release --dart-define=NEWS_API_KEY=pub_45291bd55be5d50098bd2
 - Clean Architecture research and setup for Riverpod
 - flutter_hooks reseaerch
 
-## 31 May [9:56PM - ]
+## 31 May [9:56PM - 11PM ]
+- Internet Connectivity Checker updates
+- Minor UI updatea
+- Planning and Research on how to implement the APIs
+
+## 1st June [11AM- ]
+- API integration with Retrofit 
+- updates in constants - setup of Home Page UI 
+- Article Mdoel and entity created 
+- Clean Architecture setups 
+- Depencency Inejection via Providers 
+- Routing Updates and changes

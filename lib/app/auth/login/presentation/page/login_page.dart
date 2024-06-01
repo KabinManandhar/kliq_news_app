@@ -21,21 +21,23 @@ class LoginPage extends ConsumerWidget {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (connectivityStatus == ConnectivityStatus.isConnected) {
-        return;
-      }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          showCloseIcon: true,
-          duration: connectivityStatus == ConnectivityStatus.isConnected
-              ? const Duration(milliseconds: 500)
-              : const Duration(seconds: 30),
-          content: Text(
-            connectivityStatus == ConnectivityStatus.isConnected
-                ? 'Welcome!'
-                : 'Please reconnect to the internet',
+        debugPrint('Connected');
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            showCloseIcon: true,
+            duration: connectivityStatus == ConnectivityStatus.isConnected
+                ? const Duration(milliseconds: 500)
+                : const Duration(seconds: 5),
+            content: Text(
+              connectivityStatus == ConnectivityStatus.isConnected
+                  ? 'Welcome!'
+                  : 'Please reconnect to the internet',
+            ),
           ),
-        ),
-      );
+        );
+      }
     });
     final UiHelper uiHelper = UiHelper();
     return BasePage(

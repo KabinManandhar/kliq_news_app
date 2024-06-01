@@ -54,12 +54,11 @@ final getNewsArticleUseCaseProvider =
 
 typedef GetNewsArticleUseCaseRef
     = AutoDisposeProviderRef<GetLatestNewsArticlesUseCase>;
-String _$homeNotifierHash() => r'be032dcc9435e1bcfcbc277a80f2b26536b4bf35';
+String _$homeNotifierHash() => r'b9d3b0b84c93b1810de33315a514d779ba66fc69';
 
 /// See also [HomeNotifier].
 @ProviderFor(HomeNotifier)
-final homeNotifierProvider =
-    AutoDisposeNotifierProvider<HomeNotifier, HomeState>.internal(
+final homeNotifierProvider = NotifierProvider<HomeNotifier, HomeState>.internal(
   HomeNotifier.new,
   name: r'homeNotifierProvider',
   debugGetCreateSourceHash:
@@ -68,6 +67,6 @@ final homeNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$HomeNotifier = AutoDisposeNotifier<HomeState>;
+typedef _$HomeNotifier = Notifier<HomeState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
