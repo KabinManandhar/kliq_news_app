@@ -67,7 +67,10 @@ class FavouritePage extends ConsumerWidget {
             itemCount: favouriteState.articles.length,
             itemBuilder: (context, index) {
               return ArticleCard(
-                  article: favouriteState.articles.elementAt(index));
+                fromHomeScreen: false,
+                article: favouriteState.articles.elementAt(index),
+                index: index,
+              );
             },
           );
         default:

@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kliq_news_app/app/favourite/presentation/provider/favourite_provider.dart';
+import 'package:kliq_news_app/app/home/data/model/news_article_model/article_model.dart';
+import 'package:kliq_news_app/app/home/domain/entity/article_entity.dart';
 import 'package:kliq_news_app/app/home/presentation/provider/home_provider.dart';
 import 'package:kliq_news_app/app/home/presentation/provider/home_states.dart';
 import 'package:kliq_news_app/app/home/presentation/widget/article_card.dart';
@@ -50,7 +52,11 @@ class HomePage extends ConsumerWidget {
           return ListView.builder(
             itemCount: homeState.articles.length,
             itemBuilder: (context, index) {
-              return ArticleCard(article: homeState.articles.elementAt(index));
+              return ArticleCard(
+                article: ArticleEntity.fromModel(
+                  homeState.articles.elementAt(index) as ArticleModel,
+                ),
+              );
             },
           );
         default:
