@@ -14,8 +14,8 @@ class _ThemeToggleButtonState extends ConsumerState<ThemeToggleButton> {
   int _currentIndex = 0;
 
   final List<String> _emojis = [
-    '🌙', // Dark theme emoji
     '🌍', // System theme emoji
+    '🌙', // Dark theme emoji
     '☀️', // Light theme emoji
   ];
 
@@ -27,10 +27,10 @@ class _ThemeToggleButtonState extends ConsumerState<ThemeToggleButton> {
     final themeNotifier = ref.read(themeNotifierProvider.notifier);
     switch (_currentIndex) {
       case 0:
-        themeNotifier.toogleDarkTheme();
+        themeNotifier.toggleSystemTheme();
         break;
       case 1:
-        themeNotifier.toggleSystemTheme();
+        themeNotifier.toogleDarkTheme();
         break;
       case 2:
         themeNotifier.toggleLightTheme();

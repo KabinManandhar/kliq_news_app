@@ -8,6 +8,7 @@ import 'package:kliq_news_app/core/global/widgets/app_button.dart';
 import 'package:kliq_news_app/core/global/widgets/app_text_field.dart';
 import 'package:kliq_news_app/core/global/widgets/app_theme_button.dart';
 import 'package:kliq_news_app/core/resources/extensions/context_extension.dart';
+import 'package:kliq_news_app/core/resources/services/connectivity/connectivity_status_provider.dart';
 import 'package:kliq_news_app/core/resources/ui_helper.dart';
 
 @RoutePage()
@@ -16,6 +17,23 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var connectivityStatusProvider = ref.watch(connectivityStatusProviders);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          showCloseIcon: true,
+          duration: connectivityStatusProvider == ConnectivityStatus.isConnected
+              ? const Duration(milliseconds: 500)
+              : const Duration(seconds: 30),
+          content: Text(
+            connectivityStatusProvider == ConnectivityStatus.isConnected
+                ? 'Welcome!'
+                : 'Please reconnect to the internet',
+          ),
+        ),
+      );
+    });
     final UiHelper uiHelper = UiHelper();
     return BasePage(
       titleText: " ",

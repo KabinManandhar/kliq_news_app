@@ -25,11 +25,11 @@ class RegisterPage extends ConsumerWidget {
             const Spacer(),
             _welcomeTexts(context),
             uiHelper.mHeight,
-            const AppTextField(
-              hintText: 'Kabin Manandhar',
-              label: 'Name',
-              hidePadding: true,
-            ),
+            // const AppTextField(
+            //   hintText: 'Kabin Manandhar',
+            //   label: 'Name',
+            //   hidePadding: true,
+            // ),
             uiHelper.sHeight,
             const AppTextField(
               hintText: 'kabinmanandhar@outlook.com',

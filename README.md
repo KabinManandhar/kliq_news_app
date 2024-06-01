@@ -36,3 +36,5 @@ flutter build apk --release --dart-define=NEWS_API_KEY=pub_45291bd55be5d50098bd2
 - Setups for Authentications
 - Clean Architecture research and setup for Riverpod
 - flutter_hooks reseaerch
+
+## 31 May [9:56PM - ]

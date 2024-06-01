@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kliq_news_app/config/theme/provider/theme_provider.dart';
+import 'package:kliq_news_app/core/resources/services/connectivity/connectivity_status_provider.dart';
 import 'package:kliq_news_app/firebase_options.dart';
 
 import 'config/router/app_router.dart';
@@ -31,6 +32,7 @@ class KliqNews extends StatelessWidget {
     return Consumer(
       builder: (context, ref, child) {
         final themeMode = ref.watch(themeNotifierProvider);
+       
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: _appRouter.config(),
