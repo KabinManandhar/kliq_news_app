@@ -38,19 +38,28 @@ flutter build apk --release --dart-define=NEWS_API_KEY=pub_45291bd55be5d50098bd2
 - flutter_hooks reseaerch
 
 ## 31 May [9:56PM - 11PM ]
+
 - Internet Connectivity Checker updates
 - Minor UI updatea
 - Planning and Research on how to implement the APIs
 
 ## 1st June [ 11AM- 10:00PM ]
-- API integration with Retrofit 
-- updates in constants - setup of Home Page UI 
-- Article Mdoel and entity created 
-- Clean Architecture setups 
-- Depencency Inejection via Providers 
+
+- API integration with Retrofit
+- updates in constants - setup of Home Page UI
+- Article Mdoel and entity created
+- Clean Architecture setups
+- Depencency Inejection via Providers
 - Routing Updates and changes
 - Hive integration for storing favourite locally
 - Login handled completely by Firebase authentications
 - Auth routing and blocking added to required screens
 - Minor design flaws and functional fixes
 - Rough implementations of Firebase and Hive integrations
+
+## 2nd June [9AM - 10:15 AM]
+
+- Wrapping up
+- Preparing Gitlab to be public
+- Added Refresh on home screen
+- Other minor changes and fixes
