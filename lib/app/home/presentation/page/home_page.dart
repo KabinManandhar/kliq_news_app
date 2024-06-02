@@ -9,6 +9,7 @@ import 'package:kliq_news_app/app/home/presentation/provider/home_states.dart';
 import 'package:kliq_news_app/app/home/presentation/widget/article_card.dart';
 import 'package:kliq_news_app/core/global/constants/app_strings.dart';
 import 'package:kliq_news_app/core/global/page/base_page.dart';
+import 'package:kliq_news_app/core/global/widgets/app_button.dart';
 import 'package:kliq_news_app/core/global/widgets/app_theme_button.dart';
 import 'package:kliq_news_app/core/resources/services/connectivity/connectivity_status_provider.dart';
 
@@ -47,17 +48,35 @@ class HomePage extends ConsumerWidget {
         case HomeStateStatus.loading:
           return const Center(child: CircularProgressIndicator());
         case HomeStateStatus.failure:
-          return const Center(child: Text('Failed to load articles'));
-        case HomeStateStatus.success:
-          return ListView.builder(
-            itemCount: homeState.articles.length,
-            itemBuilder: (context, index) {
-              return ArticleCard(
-                article: ArticleEntity.fromModel(
-                  homeState.articles.elementAt(index) as ArticleModel,
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Failed to load articles'),
+                AppButton(
+                  label: 'Reload',
+                  onPressed: () {
+                    return ref.refresh(homeNotifierProvider);
+                  },
                 ),
-              );
+              ],
+            ),
+          );
+        case HomeStateStatus.success:
+          return RefreshIndicator(
+            onRefresh: () async {
+              return await ref.refresh(homeNotifierProvider);
             },
+            child: ListView.builder(
+              itemCount: homeState.articles.length,
+              itemBuilder: (context, index) {
+                return ArticleCard(
+                  article: ArticleEntity.fromModel(
+                    homeState.articles.elementAt(index) as ArticleModel,
+                  ),
+                );
+              },
+            ),
           );
         default:
           return const Center(child: Text('Unknown state'));
