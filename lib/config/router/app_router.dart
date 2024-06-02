@@ -8,6 +8,7 @@ import 'package:kliq_news_app/app/home/domain/entity/article_entity.dart';
 import 'package:kliq_news_app/app/home/presentation/page/article_detail_screen.dart';
 import 'package:kliq_news_app/app/home/presentation/page/home_page.dart';
 import 'package:kliq_news_app/app/wrapper/presentation/page/wrapper_page.dart';
+import 'package:kliq_news_app/config/router/auth_guard.dart';
 
 import 'route_name.dart';
 
@@ -20,15 +21,16 @@ class AppRouter extends _$AppRouter {
 
   @override
   List<AutoRoute> get routes => [
-        //Login Page
+        // Login Page
         AutoRoute(path: RouteName.login, page: LoginRoute.page),
-        //Register Page
+        // Register Page
         AutoRoute(path: RouteName.register, page: RegisterRoute.page),
-        //Article Detail Page
+        // Article Detail Page
         AutoRoute(path: RouteName.articleDetail, page: ArticleDetailRoute.page),
-        // Wrapper Page,
+        // Wrapper Page
         AutoRoute(
           path: '/',
+          initial: true,
           page: WrapperRoute.page,
           children: [
             AutoRoute(
@@ -38,10 +40,12 @@ class AppRouter extends _$AppRouter {
             AutoRoute(
               path: RouteName.favourite,
               page: FavouriteRoute.page,
+              guards: [AuthGuard()],
             ),
             AutoRoute(
               path: RouteName.account,
               page: AccountRoute.page,
+              guards: [AuthGuard()],
             ),
           ],
         ),

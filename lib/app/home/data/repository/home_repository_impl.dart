@@ -21,7 +21,8 @@ class HomeRepositoryImpl implements IHomeRepository {
           );
       if (response.response.statusCode == HttpStatus.ok) {
         final NewsArticleModel model = response.data;
-        return DataSuccess(model.results);
+        final List<ArticleModel> articleModelList = model.results;
+        return DataSuccess(articleModelList);
       } else {
         return DataFailed(DioException(
             error: response.response.statusMessage,

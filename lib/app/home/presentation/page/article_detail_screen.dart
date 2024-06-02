@@ -13,6 +13,7 @@ class ArticleDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePage(
+      automaticallyImplyiLeading: true,
       titleText: (article.title),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),

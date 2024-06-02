@@ -13,7 +13,6 @@ part 'home_provider.g.dart';
 //!---------Value Type Providers---------
 @riverpod
 HomeApiService homeAPIService(HomeAPIServiceRef ref) {
-  ref.watch(networkServiceProvider);
   return HomeApiService(ref.watch(networkServiceProvider));
 }
 

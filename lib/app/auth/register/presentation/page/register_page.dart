@@ -1,19 +1,55 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kliq_news_app/app/auth/provider/auth_notifier_provider.dart';
+import 'package:kliq_news_app/config/router/app_router.dart';
 import 'package:kliq_news_app/core/global/constants/app_sizes.dart';
 import 'package:kliq_news_app/core/global/page/base_page.dart';
 import 'package:kliq_news_app/core/global/widgets/app_button.dart';
 import 'package:kliq_news_app/core/global/widgets/app_text_field.dart';
 import 'package:kliq_news_app/core/resources/extensions/context_extension.dart';
 import 'package:kliq_news_app/core/resources/ui_helper.dart';
+import 'package:kliq_news_app/core/resources/validators.dart';
 
 @RoutePage()
-class RegisterPage extends ConsumerWidget {
+class RegisterPage extends HookConsumerWidget {
   const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(authNotifierProvider, (previous, next) {
+      next.maybeWhen(
+        orElse: () => null,
+        authenticated: (user) {
+          // Navigate to any screen
+          EasyLoading.dismiss();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('User Authenticated'),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          context.router.pushAndPopUntil(
+            const HomeRoute(),
+            predicate: (route) => false,
+          );
+        },
+        unauthenticated: (message) {
+          EasyLoading.showError('Registration Failed');
+
+          return ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(message!),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        },
+      );
+    });
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
     final UiHelper uiHelper = UiHelper();
     return BasePage(
       titleText: " ",
@@ -25,28 +61,31 @@ class RegisterPage extends ConsumerWidget {
             const Spacer(),
             _welcomeTexts(context),
             uiHelper.mHeight,
-            // const AppTextField(
-            //   hintText: 'Kabin Manandhar',
-            //   label: 'Name',
-            //   hidePadding: true,
-            // ),
             uiHelper.sHeight,
-            const AppTextField(
-              hintText: 'kabinmanandhar@outlook.com',
+            AppTextField(
+              hintText: 'johndoe@kliqnews.com',
               label: 'Email',
+              validator: AppValidators.validateEmail,
+              controller: emailController,
               hidePadding: true,
             ),
             uiHelper.sHeight,
-            const AppTextField(
+            AppTextField(
               isObscure: true,
               hintText: '*********',
               label: 'Password',
+              validator: AppValidators.validatePassword,
+              controller: passwordController,
               hidePadding: true,
             ),
             uiHelper.sHeight,
-            const AppTextField(
+            AppTextField(
               isObscure: true,
               hintText: '*********',
+              validator: (p0) {
+                return AppValidators.validateConfirmPassword(
+                    p0, passwordController.text);
+              },
               label: 'Confirm Password',
               hidePadding: true,
             ),
@@ -54,7 +93,11 @@ class RegisterPage extends ConsumerWidget {
             AppButton(
               label: 'Register',
               onPressed: () {
-                // context.router.push(const RegisterRoute());
+                ref.read(authNotifierProvider.notifier).signup(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    );
+                EasyLoading.show(status: 'Registering...');
               },
             ),
             const Spacer(),
