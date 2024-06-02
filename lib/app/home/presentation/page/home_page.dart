@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kliq_news_app/app/favourite/presentation/provider/favourite_provider.dart';
 import 'package:kliq_news_app/app/home/data/model/news_article_model/article_model.dart';
 import 'package:kliq_news_app/app/home/domain/entity/article_entity.dart';
 import 'package:kliq_news_app/app/home/presentation/provider/home_provider.dart';
@@ -21,7 +20,6 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final connectivityStatus = ref.watch(connectivityStatusProvider);
     final homeState = ref.watch(homeNotifierProvider);
-    final favouriteState = ref.watch(favouriteNotifierProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (connectivityStatus == ConnectivityStatus.isConnected) {
         debugPrint('Connected');

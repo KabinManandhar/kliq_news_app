@@ -52,8 +52,8 @@ class ArticleEntity extends Equatable {
 
   factory ArticleEntity.fromModel(ArticleModel model) {
     return ArticleEntity(
-      articleId: model.articleId ?? '',
-      title: model.title ?? '',
+      articleId: model.articleId,
+      title: model.title,
       link: model.link ?? '',
       keywords: model.keywords ?? [],
       creator: model.creator ?? [],

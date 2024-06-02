@@ -96,7 +96,7 @@ final getFavouriteArticleUseCaseProvider =
 
 typedef GetFavouriteArticleUseCaseRef
     = AutoDisposeProviderRef<GetFavouriteArticleUseCase>;
-String _$favouriteNotifierHash() => r'9495c8aabe9385b18466346ca9f267105fe4210f';
+String _$favouriteNotifierHash() => r'11cdadb369fe0cb61fbbdfd51285853fed25a99e';
 
 /// See also [FavouriteNotifier].
 @ProviderFor(FavouriteNotifier)
