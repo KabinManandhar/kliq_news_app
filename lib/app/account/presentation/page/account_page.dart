@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kliq_news_app/config/router/app_router.dart';
-import 'package:kliq_news_app/config/theme/provider/theme_provider.dart';
 import 'package:kliq_news_app/core/global/constants/app_sizes.dart';
 import 'package:kliq_news_app/core/global/constants/app_strings.dart';
 import 'package:kliq_news_app/core/global/page/base_page.dart';
@@ -21,7 +20,7 @@ class AccountPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nameController = TextEditingController();
-    final themeNotifier = ref.read(themeNotifierProvider.notifier);
+
     final authStateChange =
         ref.listen(authStateChangesProvider, (previous, next) {
       if (next.value == null) {
